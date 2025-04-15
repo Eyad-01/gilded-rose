@@ -44,8 +44,8 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 0, 80) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals(80, app.items[0].quality);
         assertEquals(0, app.items[0].sellIn);
+        assertEquals(80, app.items[0].quality);
     }
 
     @Test
@@ -67,6 +67,30 @@ class GildedRoseTest {
     @Test
     void backstagedroptozero() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+    }
+
+    @Test
+    void conjureditemsdecreasequalitytwice() {
+        Item[] items = new Item[] { new Item("Conjured", 3, 6) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(4, app.items[0].quality);
+    }
+
+    @Test
+    void conjureditemsdecreasequalitytwiceafterexpiration() {
+        Item[] items = new Item[] { new Item("Conjured", 0, 6) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(2, app.items[0].quality);
+    }
+
+    @Test
+    void conjureditemsqualitynevernegative() {
+        Item[] items = new Item[] { new Item("Conjured", 0, 1) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);

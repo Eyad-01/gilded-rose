@@ -21,6 +21,9 @@ class GildedRose {
                 case "Sulfuras, Hand of Ragnaros":
                     updater = new sulfurasclass();
                     break;
+                case "Conjured":
+                    updater = new conjuredclass();
+                    break;
                 default:
                     updater = new updaterclass();
                     break;
